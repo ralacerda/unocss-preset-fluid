@@ -1,0 +1,31 @@
+{
+  "name": "unocss-preset-fluid",
+  "version": "1.0.0",
+  "description": "Use fluid typography with UnoCSS.",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "pnpm build"
+  },
+  "author": "Renato Lacerda <https://github.com/ralacerda>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "unocss": "^0.51.12"
+  }
+}
