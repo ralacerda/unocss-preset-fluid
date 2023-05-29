@@ -10,11 +10,34 @@ const defaultOption: Required<PresetFluidOptions> = {
 };
 
 interface PresetFluidOptions extends PresetOptions {
+  /**
+   * @default 600
+   */
   minPortSize?: number;
+
+  /**
+   * @default 1400
+   */
   maxPortSize?: number;
+
+  /**
+   * @default 1.2
+   */
   minScale?: number;
+
+  /**
+   * @default 1.4
+   */
   maxScale?: number;
+
+  /**
+   * @default 16
+   */
   minSize?: number;
+
+  /**
+   * @default 22
+   */
   maxSize?: number;
 }
 
@@ -35,16 +58,18 @@ export function presetFluid(options: PresetFluidOptions = {}): Preset {
   };
 }
 
-function getFluidSize(step: number, ...config: any) {
-  const minFontSize = minSize * minScale ** step;
-  const maxFontSize = maxSize * maxScale ** step;
+function getFluidSize(step: number, config: Required<PresetFluidOptions>) {
+  const minFontSize = config.minSize * config.minScale ** step;
+  const maxFontSize = config.maxSize * config.maxScale ** step;
 
   // this formula is based on:
   // https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/
-  const v = (100 * (maxFontSize - minFontSize)) / (maxPortSize - minPortSize);
+  const v =
+    (100 * (maxFontSize - minFontSize)) /
+    (config.maxPortSize - config.minPortSize);
   const r =
-    (maxFontSize * minPortSize - minFontSize * maxPortSize) /
-    (minPortSize - maxPortSize) /
+    (maxFontSize * config.minPortSize - minFontSize * config.maxPortSize) /
+    (config.minPortSize - config.maxPortSize) /
     16;
 
   return `clamp(${minFontSize / 16}rem, ${v}vw + ${r}rem, ${
