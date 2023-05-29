@@ -3,7 +3,19 @@ import "virtual:uno.css";
 </script>
 
 <template>
-  <h1 class="fluid-2">Hello</h1>
-  <p class="fluid-1">Space</p>
-  <small class="fluid--1">Smol</small>
+  <div class="flow content">
+    <h1 class="fluid-6">Hello</h1>
+    <p class="fluid-3">Space</p>
+    <p class="fluid--1">Smol</p>
+  </div>
 </template>
+
+<style scoped>
+.content * {
+  margin-block: 0;
+}
+
+.flow > * + * {
+  margin-top: 0.5em;
+}
+</style>
